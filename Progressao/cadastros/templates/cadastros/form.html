@@ -1,0 +1,10 @@
+<form method="POST">
+    {% csrf_token %}
+    {% load crispy_forms_tags %}
+
+    {{ form|crispy }}
+
+    <button type="submit" class="btn btn-success">
+        Cadastrar
+    </button>
+</form>

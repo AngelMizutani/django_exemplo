@@ -1,0 +1,47 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>´
+
+    {% block titulo %}
+    <title>Listar Campos</title>
+    {% endblock %}
+
+    <link rel='stylesheet' href="{% static 'css/boostrap.min.css' %}">
+    <script src='main.js'></script>
+</head>
+
+<body>
+    
+
+{% block conteudo %}
+<div class="container">
+    <table class="table table-striped">
+    <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Descrição</th>
+    </tr>
+    {% for campo in object_list %}
+    <tr>
+        <td>{{ campo.pk }}</td>
+        <td>{{ campo.nome }}</td>
+        <td>{{ campo.descricao }}</td>
+        <td>
+            <a href="{% url 'atualizar-campo' campo.pk %}" class="btn btn-warning btn-sm">Editar</a>
+            <a href="{% url 'deletar-campo' campo.pk %}" class="btn btn-danger btn-sm">Excluir</a>
+        </td>
+    </tr>
+    {% empty %}
+    <tr>
+        <td colspan="3">Nenhum campo cadastrado!</td>
+    </tr>
+    {% endfor %}
+</table>
+</div>
+{% endblock %}
+</body>
+</html>

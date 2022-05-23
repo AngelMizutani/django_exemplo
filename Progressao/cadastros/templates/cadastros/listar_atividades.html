@@ -1,0 +1,53 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>´
+
+    {% block titulo %}
+    <title>Listar Atividades</title>
+    {% endblock %}
+
+    <link rel='stylesheet' href="{% static 'css/boostrap.min.css' %}">
+    <script src='main.js'></script>
+</head>
+
+<body>
+    
+
+{% block conteudo %}
+<div class="container">
+    <table class="table table-striped">
+    <tr>
+        <th>ID</th>
+        <th>Numero</th>
+        <th>Descrição</th>
+        <th>Pontos</th>
+        <th>Detalhes</th>
+        <th>Campo</th>
+    </tr>
+    {% for atividade in object_list %}
+    <tr>
+        <td>{{ atividade.pk }}</td>
+        <td>{{ atividade.numero }}</td>
+        <td>{{ atividade.descricao }}</td>
+        <td>{{ atividade.pontos }}</td>
+        <td>{{ atividade.detalhes }}</td>
+        <td>{{ atividade.campo.nome }}</td>
+        <td>
+            <a href="{% url 'atualizar-atividade' atividade.pk %}" class="btn btn-warning btn-sm">Editar</a>
+            <a href="{% url 'deletar-atividade' atividade.pk %}" class="btn btn-danger btn-sm">Excluir</a>
+        </td>
+    </tr>
+    {% empty %}
+    <tr>
+        <td colspan="3">Nenhum campo cadastrado!</td>
+    </tr>
+    {% endfor %}
+</table>
+</div>
+{% endblock %}
+</body>
+</html>
